@@ -2,7 +2,7 @@
 
 **Документация:** [русская](docs/README.md) · **[English](docs/en/README.md)** · [README.en.md](README.en.md)
 
-Python-порт книги `ECS_model3_3 N.xls` — программы для расчёта ионных равновесий и компартментной модели ЭД (диссертация [Сеник Ю.В., 2005](https://www.dissercat.com/content/teoreticheskoe-i-eksperimentalnoe-issledovanie-elektromembrannykh-protsessov-pererabotki-pri)).
+Python-порт книги `ECS_model3_3 N.xls` — программы для расчёта ионных равновесий и компартментной модели ЭД (диссертация [Сеник Ю.В., 2005](https://www.dissercat.com/content/teoreticheskoe-i-eksperimentalnoe-issledovanie-elektromembrannykh-protsessov-pererabotki-pri); научный руководитель — **Никоненко Виктор Васильевич**).
 
 Лицензия: [MIT](LICENSE).
 
@@ -108,6 +108,10 @@ for pt in channel.points:
 ## Верификация
 
 Тесты сравнивают Python с сохранёнными значениями Excel (листы *Ion Equlibrium*, *ECS*, *pH(L)*). Критический путь — профиль pH по длине канала (19 точек, ±0.001 pH).
+
+## Благодарности
+
+Исходная Excel-модель и диссертационное исследование (2005) выполнены под научным руководством **Никоненко Виктора Васильевича**. Автор благодарит научного руководителя за постановку задачи, методологическую поддержку и развитие подходов к моделированию электромембранных процессов.
 
 ## Литература
 

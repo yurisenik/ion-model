@@ -2,7 +2,7 @@
 
 **Documentation:** [English](docs/en/README.md) · [русская](docs/README.md) · [README.md](README.md)
 
-Python port of `ECS_model3_3 N.xls` — ionic equilibrium and compartment electrodialysis model from the [dissertation by Senik Yu.V., 2005](https://www.dissercat.com/content/teoreticheskoe-i-eksperimentalnoe-issledovanie-elektromembrannykh-protsessov-pererabotki-pri).
+Python port of `ECS_model3_3 N.xls` — ionic equilibrium and compartment electrodialysis model from the [dissertation by Senik Yu.V., 2005](https://www.dissercat.com/content/teoreticheskoe-i-eksperimentalnoe-issledovanie-elektromembrannykh-protsessov-pererabotki-pri) (scientific advisor: **Viktor Vasilievich Nikonenko**).
 
 License: [MIT](LICENSE).
 
@@ -113,6 +113,10 @@ for pt in channel.points:
 ## Verification
 
 Tests compare Python to saved Excel values (*Ion Equlibrium*, *ECS*, *pH(L)*). Critical check: pH profile along the channel (19 points, ±0.001 pH).
+
+## Acknowledgments
+
+The original Excel model and dissertation research (2005) were conducted under the supervision of **Viktor Vasilievich Nikonenko**. The author thanks his scientific advisor for guidance, methodological support, and contributions to electrodialysis process modeling.
 
 ## Reference
 
