@@ -40,9 +40,9 @@ ECS использует вариант **без контр-ионов** (`Comma
 
 ### 2.1. `Tw_func`
 
-\[
+$$
 T_w(i) = B\,\bigl(\exp(A\, i/i_{lim}) - 1\bigr)
-\]
+$$
 
 Параметры *A*, *B* — лист Constants (B25, C25).
 
@@ -60,9 +60,9 @@ T_w(i) = B\,\bigl(\exp(A\, i/i_{lim}) - 1\bigr)
 
 Для каждого иона (кроме H₂CO₃) поток через мембранный пакет:
 
-\[
+$$
 n_k = -\mathrm{desalination}\,\frac{(T_{\mathrm{MC},k} - T_{\mathrm{MA},k})\, i\, A\, L}{|z_k|\, F}
-\]
+$$
 
 - **DC:** `desalination = +1`, объёмный расход `V = W_DC` (мл/с) → в `equilibrium_calc` передаётся `V/1000` (л/с).
 - **CC:** `desalination = -1`, `V = W_CC`.

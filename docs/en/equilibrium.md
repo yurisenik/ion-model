@@ -48,24 +48,24 @@ According to dissertation verification, pH, component concentrations, and (in th
 
 **First dissociation of carbonic acid:**
 
-\[
+$$
 \mathrm{H_2CO_3 \rightleftharpoons H^+ + HCO_3^-}
 \qquad K_1(T)
-\]
+$$
 
 **Second dissociation:**
 
-\[
+$$
 \mathrm{HCO_3^- \rightleftharpoons H^+ + CO_3^{2-}}
 \qquad K_2(T)
-\]
+$$
 
 **Water autoprotolysis:**
 
-\[
+$$
 \mathrm{H_2O \rightleftharpoons H^+ + OH^-}
 \qquad K_w(T)
-\]
+$$
 
 Strong electrolyte ions (Na⁺, Ca²⁺, Cl⁻, …) **do not undergo protolytic redistribution**; their total amounts are conserved.
 
@@ -82,118 +82,118 @@ Strong electrolyte ions (Na⁺, Ca²⁺, Cl⁻, …) **do not undergo protolytic
 
 After mixing or adding substances in volume *V* (L), the analytical concentration of each component is:
 
-\[
+$$
 m_i = C_{0,i} + \frac{n_i}{V}
-\]
+$$
 
-where \(C_{0,i}\) is initial concentration (mol/L), \(n_i\) is amount added (mol). Negative \(n_i\) means removal.
+where $C_{0,i}$ is initial concentration (mol/L), $n_i$ is amount added (mol). Negative $n_i$ means removal.
 
 ### Carbon balance
 
-\[
+$$
 s_m = m_{\mathrm{H_2CO_3}} + m_{\mathrm{HCO_3^-}} + m_{\mathrm{CO_3^{2-}}}
-\]
+$$
 
 Total analytical carbon in the carbonate system (mol C/L).
 
 ### Auxiliary parameter
 
-\[
+$$
 s_{m1} = m_{\mathrm{H^+}} + m_{\mathrm{H_2CO_3}} - m_{\mathrm{CO_3^{2-}}} - m_{\mathrm{OH^-}}
-\]
+$$
 
-For typical inputs (no added acid/base), \(m_{\mathrm{H^+}} \approx m_{\mathrm{CO_3^{2-}}} \approx m_{\mathrm{OH^-}} \approx 0\) and \(s_{m1} \approx m_{\mathrm{H_2CO_3}}\). This parameter enters the polynomial coefficients when initial H⁺, OH⁻, or CO₃²⁻ are nonzero.
+For typical inputs (no added acid/base), $m_{\mathrm{H^+}} \approx m_{\mathrm{CO_3^{2-}}} \approx m_{\mathrm{OH^-}} \approx 0$ and $s_{m1} \approx m_{\mathrm{H_2CO_3}}$. This parameter enters the polynomial coefficients when initial H⁺, OH⁻, or CO₃²⁻ are nonzero.
 
 ---
 
 ## 4. Equilibrium with activity coefficients
 
-Constants are expressed via **activities** \(a_i = \gamma_i c_i\):
+Constants are expressed via **activities** $a_i = \gamma_i c_i$:
 
-\[
+$$
 K_1 = \frac{a_{\mathrm{H^+}}\, a_{\mathrm{HCO_3^-}}}{a_{\mathrm{H_2CO_3}}}
 \qquad
 K_2 = \frac{a_{\mathrm{H^+}}\, a_{\mathrm{CO_3^{2-}}}}{a_{\mathrm{HCO_3^-}}}
 \qquad
 K_w = a_{\mathrm{H^+}}\, a_{\mathrm{OH^-}}
-\]
+$$
 
 On each γ iteration, **reduced constants** are used:
 
-\[
+$$
 k_{p,1} = K_1 \frac{\gamma_{\mathrm{H_2CO_3}}}{\gamma_{\mathrm{H^+}}\, \gamma_{\mathrm{HCO_3^-}}}
 \qquad
 k_{p,2} = K_2 \frac{\gamma_{\mathrm{HCO_3^-}}}{\gamma_{\mathrm{H^+}}\, \gamma_{\mathrm{CO_3^{2-}}}}
 \qquad
 k_{p,3} = K_w \frac{1}{\gamma_{\mathrm{H^+}}\, \gamma_{\mathrm{OH^-}}}
-\]
+$$
 
-### Equilibrium concentrations (fixed \(c_{\mathrm{H^+}} = A\))
+### Equilibrium concentrations (fixed $c_{\mathrm{H^+}} = A$)
 
-Let \(A = [\mathrm{H^+}]\). Then:
+Let $A = [\mathrm{H^+}]$. Then:
 
-\[
+$$
 [\mathrm{HCO_3^-}] = \frac{s_m}{1 + A/k_{p,1} + k_{p,2}/A}
-\]
+$$
 
-\[
+$$
 [\mathrm{H_2CO_3}] = \frac{A\,[\mathrm{HCO_3^-}]}{k_{p,1}}
 \qquad
 [\mathrm{CO_3^{2-}}] = \frac{k_{p,2}\,[\mathrm{HCO_3^-}]}{A}
 \qquad
 [\mathrm{OH^-}] = \frac{k_{p,3}}{A}
-\]
+$$
 
-Strong electrolyte concentrations equal \(m_i\).
+Strong electrolyte concentrations equal $m_i$.
 
 ---
 
 ## 5. Equation for [H⁺]: fourth-degree polynomial
 
-Unknown \(A = [\mathrm{H^+}]\) is the **positive root** of \(f(A) = 0\):
+Unknown $A = [\mathrm{H^+}]$ is the **positive root** of $f(A) = 0$:
 
-\[
+$$
 \begin{aligned}
 f(c) =\;& c^4 + c^3(k_{p,1} - s_{m1} + s_m) \\
 &+ c^2(k_{p,1} k_{p,2} - k_{p,1} s_{m1} - k_{p,3}) \\
 &- c\,(k_{p,1} k_{p,2} s_{m1} + k_{p,3} k_{p,1} + s_m k_{p,1} k_{p,2}) \\
 &- k_{p,1} k_{p,2} k_{p,3}
 \end{aligned}
-\]
+$$
 
 `fun_no_precip(c, kp, sm, sm1)` implements this expression.
 
-The equation follows from carbonate and water equilibria, material balances \(s_m\), \(s_{m1}\), and charge neutrality.
+The equation follows from carbonate and water equilibria, material balances $s_m$, $s_{m1}$, and charge neutrality.
 
-If \(f\) has no sign change on \([10^{-15},\,10]\) mol/L, `equilibrium_calc` returns `success=False`.
+If $f$ has no sign change on $[10^{-15},\,10]$ mol/L, `equilibrium_calc` returns `success=False`.
 
 ---
 
 ## 6. Temperature dependence of constants
 
-Absolute temperature: \(T_\mathrm{abs} = t + 273.15\) (K), \(t\) in °C.
+Absolute temperature: $T_\mathrm{abs} = t + 273.15$ (K), $t$ in °C.
 
 ### 6.1. Carbonic acid constants
 
 As in VBA:
 
-\[
+$$
 \log K_1 = -\left(\frac{17052}{T_\mathrm{abs}} + 215.21\log T_\mathrm{abs} - 0.12675\,T_\mathrm{abs} - 545.56\right)
-\]
+$$
 
-\[
+$$
 \log K_2 = -\left(\frac{2909.1}{T_\mathrm{abs}} - 6.498 + 0.02379\,T_\mathrm{abs}\right)
-\]
+$$
 
-\(K_1, K_2 = 10^{\log K}\).
+$K_1, K_2 = 10^{\log K}$.
 
 ### 6.2. Ion product of water
 
 `kw(t_celsius)`:
 
-1. Table of \((t,\; pK_w)\) from Lurie Yu.Yu. (1971) — 35 points from 0 to 100 °C.
-2. **Lagrange interpolation** for \(pK_w(t)\).
-3. \(K_w = 10^{-pK_w} \times 10^{-14}\) (in code: `sum_kw * 1e-14`).
+1. Table of $(t,\; pK_w)$ from Lurie Yu.Yu. (1971) — 35 points from 0 to 100 °C.
+2. **Lagrange interpolation** for $pK_w(t)$.
+3. $K_w = 10^{-pK_w} \times 10^{-14}$ (in code: `sum_kw * 1e-14`).
 
 ---
 
@@ -203,35 +203,35 @@ As in VBA:
 
 ### 7.1. Water dielectric permittivity
 
-\[
+$$
 \varepsilon = 78.54\,\left(1 - 0.0046\,t + 0.0000088\,t^2\right)
-\]
+$$
 
-(\(t\) in °C, as in VBA `calculate_f`).
+($t$ in °C, as in VBA `calculate_f`).
 
 ### 7.2. Ionic strength
 
-\[
+$$
 \mu = \frac{1}{2}\sum_k z_k^2 c_k
-\]
+$$
 
 Over 6 anions and 4 cations, including H⁺ as a cation.
 
 ### 7.3. Activity coefficient
 
-\[
+$$
 A_1 = 1.825\times10^6 \left(\varepsilon\,\varepsilon_0\,T_\mathrm{abs}\right)^{3/2}
-\]
+$$
 
-\[
+$$
 \log \gamma_i = -\frac{|z_i|\,A_1\,\sqrt{\mu}}{1 + \sqrt{\mu}}
 \qquad
 \gamma_i = 10^{\log \gamma_i}
-\]
+$$
 
-\(\varepsilon_0 = 8.854\times10^{-12}\) F/m.
+$\varepsilon_0 = 8.854\times10^{-12}$ F/m.
 
-First iteration: all \(\gamma_i = 1\); after finding \(A\), concentrations and \(\gamma_i\) are updated until \(|A^{(k)} - A^{(k-1)}| \le \delta\).
+First iteration: all $\gamma_i = 1$; after finding $A$, concentrations and $\gamma_i$ are updated until $|A^{(k)} - A^{(k-1)}| \le \delta$.
 
 ---
 
@@ -255,21 +255,21 @@ flowchart TD
 
 ### 8.1. Inner loop (bisection)
 
-- Interval: \(A \in [10^{-15},\,10]\) mol/L.
-- Each step checks midpoints \((A+B)/2\) and \((B-A)/2\) (two branches, as in VBA).
-- Stop when \(|A - B| \le \delta\), \(\delta \sim 10^{-\lfloor-\log A\rfloor + 14}\).
+- Interval: $A \in [10^{-15},\,10]$ mol/L.
+- Each step checks midpoints $(A+B)/2$ and $(B-A)/2$ (two branches, as in VBA).
+- Stop when $|A - B| \le \delta$, $\delta \sim 10^{-\lfloor-\log A\rfloor + 14}$.
 
 ### 8.2. Outer loop (activities)
 
-- Previous \(A\) stored as `aa`.
-- If \(|aa - A| > \delta_\mathrm{outer}\) (exponent 16), γ is updated and the loop repeats.
+- Previous $A$ stored as `aa`.
+- If $|aa - A| > \delta_\mathrm{outer}$ (exponent 16), γ is updated and the loop repeats.
 - Typically 2–5 iterations for natural waters.
 
 ### 8.3. pH
 
-\[
+$$
 \mathrm{pH} = -\log_{10}[\mathrm{H^+}]
-\]
+$$
 
 ---
 
@@ -281,8 +281,8 @@ flowchart TD
 |------|-----------|
 | C3 | Temperature, °C |
 | D3 | Volume, L |
-| B7–L7 | Initial concentrations \(C_0\) |
-| B9–L9 | Amounts added \(n\) |
+| B7–L7 | Initial concentrations $C_0$ |
+| B9–L9 | Amounts added $n$ |
 | B11–L11 | Result: equilibrium concentrations |
 | L13 | Result: pH |
 | K13 | Specific conductivity κ, S/m (`el_conduct`; B24 — κ in mS/cm) |
@@ -291,7 +291,7 @@ The calculate button calls `model.equilibrium_calc`.
 
 ### Discretization method (dissertation)
 
-Substance addition is specified as **finite amounts** \(n_i\) in volume \(V\). This models titration, stream mixing in electrodialysis, etc., by linearizing compared to continuous composition change in the full ED model.
+Substance addition is specified as **finite amounts** $n_i$ in volume $V$. This models titration, stream mixing in electrodialysis, etc., by linearizing compared to continuous composition change in the full ED model.
 
 ---
 
@@ -307,7 +307,7 @@ Excel example (V=1 L, t=18 °C): NaCl, CaCl₂, H₂CO₃, OH⁻, etc. → pH �
 
 ### 10.3. Carbonated water
 
-Lab analysis usually refers to a **degassed** sample. Excess CO₂ in the bottle increases \(m_{\mathrm{H_2CO_3}}\) via `moles_added[5]`:
+Lab analysis usually refers to a **degassed** sample. Excess CO₂ in the bottle increases $m_{\mathrm{H_2CO_3}}$ via `moles_added[5]`:
 
 | Added CO₂, mmol/L | pH (934, 25 °C) |
 |-------------------|-----------------|
@@ -320,7 +320,7 @@ pH meter reading **without degassing** in carbonated water is lower — expected
 
 ### 10.4. Charge balance of inputs
 
-The model assumes net charge of strong ions in \(m_i\) is near zero; carbonate and H⁺/OH⁻ adjust balance. Independent passport ranges for Na, Cl, HCO₃, Ca may disagree by **several meq/L** — balance before calculation (e.g. adjust Na⁺ or Cl⁻).
+The model assumes net charge of strong ions in $m_i$ is near zero; carbonate and H⁺/OH⁻ adjust balance. Independent passport ranges for Na, Cl, HCO₃, Ca may disagree by **several meq/L** — balance before calculation (e.g. adjust Na⁺ or Cl⁻).
 
 ---
 

@@ -40,9 +40,9 @@ VBA side effect: `Worksheets(2).Range("B7") = i_tot` — in Python use `Transpor
 
 ### 2.1. `Tw_func`
 
-\[
+$$
 T_w(i) = B\,\bigl(\exp(A\, i/i_{lim}) - 1\bigr)
-\]
+$$
 
 Parameters *A*, *B* are on the Constants sheet (B25, C25).
 
@@ -60,9 +60,9 @@ ECS rows **28** (AEM) and **30** (CEM) are the reference TN values for regressio
 
 For each ion (except H₂CO₃), flux through the membrane stack:
 
-\[
+$$
 n_k = -\mathrm{desalination}\,\frac{(T_{\mathrm{MC},k} - T_{\mathrm{MA},k})\, i\, A\, L}{|z_k|\, F}
-\]
+$$
 
 - **DC:** `desalination = +1`, volumetric flow `V = W_DC` (mL/s) → `equilibrium_calc` receives `V/1000` (L/s).
 - **CC:** `desalination = -1`, `V = W_CC`.

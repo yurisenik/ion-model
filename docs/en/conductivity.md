@@ -51,40 +51,40 @@ Mapping to *Ion Equlibrium* sheet (row 11) and the 11-component vector:
 
 For each ion:
 
-\[
+$$
 \tilde{c}_i = |z_i|\, c_i \quad\text{(mol-eq/L)}
-\]
+$$
 
 ### Temperature correction of λ°
 
-\[
+$$
 \lambda_i(T) = \lambda_i^{25}\,\bigl(1 + \alpha_i\,(T_\mathrm{K} - 298)\bigr)
-\]
+$$
 
-Temperature coefficients \(\alpha_i\) (1/K) are tabulated in `ion_model/conductivity.py`.
+Temperature coefficients $\alpha_i$ (1/K) are tabulated in `ion_model/conductivity.py`.
 
 Also used:
 
-- water dielectric permittivity \(\varepsilon(T)\) — same formula as in `el_conduct`;
-- viscosity \(\eta(T) = 2.414\times10^{-5}\,10^{247.8/(T_\mathrm{K}-140)}\) Pa·s.
+- water dielectric permittivity $\varepsilon(T)$ — same formula as in `el_conduct`;
+- viscosity $\eta(T) = 2.414\times10^{-5}\,10^{247.8/(T_\mathrm{K}-140)}$ Pa·s.
 
 ### Pair correction factor q
 
-For each cation–anion pair \((i,j)\):
+For each cation–anion pair $(i,j)$:
 
-\[
+$$
 q_{ij} = \frac{|z_i z_j|}{|z_i|+|z_j|} \cdot \frac{\lambda_i + \lambda_j}{|z_i|\lambda_i + |z_j|\lambda_j}
-\]
+$$
 
 ### Factor W (mass fraction in pair)
 
-\[
+$$
 W_{ij} = \frac{|z_i z_j|\, q_{ij}}{1 + \sqrt{q_{ij}}}
-\]
+$$
 
 ### Averaging W per ion and empirical γ
 
-For each cation *i* — weighted mean of \(W_{ij}\) over anion equivalent concentrations, times empirical \(\gamma_i\):
+For each cation *i* — weighted mean of $W_{ij}$ over anion equivalent concentrations, times empirical $\gamma_i$:
 
 | Ion | γ |
 |-----|---|
@@ -99,41 +99,41 @@ For each cation *i* — weighted mean of \(W_{ij}\) over anion equivalent concen
 | CO₃²⁻ | 2.0 |
 | OH⁻ | 1.6 |
 
-Similarly for anions. This yields \(\bar{W}_i^{+}\), \(\bar{W}_j^{-}\).
+Similarly for anions. This yields $\bar{W}_i^{+}$, $\bar{W}_j^{-}$.
 
 ### Ionic strength parameter for Kohlrausch correction
 
-\[
+$$
 \Gamma = \sqrt{\sum_i \tilde{c}_i\,|z_i|}
-\]
+$$
 
 Auxiliary parameter:
 
-\[
+$$
 \kappa_\mathrm{DH} = \frac{5.029\times10^{9}\,\Gamma}{\sqrt{2}\,\sqrt{\varepsilon\, T_\mathrm{K}}} \times 100
-\]
+$$
 
 ### Equivalent conductivity with concentration correction
 
 For each ion:
 
-\[
+$$
 \alpha_i = \frac{1.97\times10^{6}\,\bar{W}_i}{(\varepsilon\, T_\mathrm{K})^{3/2}}
 \qquad
 \beta_i = \frac{28.98\,|z_i|}{10\,\eta\,\sqrt{\varepsilon\, T_\mathrm{K}}}
-\]
+$$
 
-\[
+$$
 \lambda_{\mathrm{eq},i} = \lambda_i(T) - (\alpha_i\,\lambda_i(T) + \beta_i)\,\frac{\Gamma}{1 + \kappa_\mathrm{DH}\, r_i}
-\]
+$$
 
-where \(r_i\) is the effective ion radius (m), a tabulated constant in code.
+where $r_i$ is the effective ion radius (m), a tabulated constant in code.
 
 ### Specific conductivity of the solution
 
-\[
+$$
 \kappa = \frac{1}{10}\sum_i \lambda_{\mathrm{eq},i}\,\tilde{c}_i \quad\text{(S/m)}
-\]
+$$
 
 Summation over all cations and anions. Division by 10 converts VBA internal units to **S/m**.
 
