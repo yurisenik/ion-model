@@ -1,5 +1,7 @@
 # Модель ионных равновесий и электродиализа
 
+**Документация:** [русская](docs/README.md) · **[English](docs/en/README.md)** · [README.en.md](README.en.md)
+
 Python-порт книги `ECS_model3_3 N.xls` — программы для расчёта ионных равновесий и компартментной модели ЭД (диссертация [Сеник Ю.В., 2005](https://www.dissercat.com/content/teoreticheskoe-i-eksperimentalnoe-issledovanie-elektromembrannykh-protsessov-pererabotki-pri)).
 
 Лицензия: [MIT](LICENSE).

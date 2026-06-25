@@ -1,10 +1,10 @@
 # Ionic equilibrium and electrodialysis model
 
+**Documentation:** [English](docs/en/README.md) · [русская](docs/README.md) · [README.md](README.md)
+
 Python port of `ECS_model3_3 N.xls` — ionic equilibrium and compartment electrodialysis model from the [dissertation by Senik Yu.V., 2005](https://www.dissercat.com/content/teoreticheskoe-i-eksperimentalnoe-issledovanie-elektromembrannykh-protsessov-pererabotki-pri).
 
 License: [MIT](LICENSE).
-
-**Русская версия:** [README.md](README.md)
 
 ## Features
 
