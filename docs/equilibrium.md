@@ -257,7 +257,7 @@ flowchart TD
     F -->|нет| G[success = false]
     F -->|да| H[Бисекция: найти A = H+]
     H --> I[Равновесные c_i от A]
-    I --> J{|A - A_prev| <= delta?}
+    I --> J{"|A - A_prev| <= delta?"}
     J -->|да| K[pH = -log A; return]
     J -->|нет| L[Пересчёт gamma по mu]
     L --> E

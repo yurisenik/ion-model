@@ -247,7 +247,7 @@ flowchart TD
     F -->|no| G[success = false]
     F -->|yes| H[Bisection: find A = H+]
     H --> I[Equilibrium c_i from A]
-    I --> J{|A - A_prev| <= delta?}
+    I --> J{"|A - A_prev| <= delta?"}
     J -->|yes| K[pH = -log A; return]
     J -->|no| L[Recalc gamma from mu]
     L --> E
